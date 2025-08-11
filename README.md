@@ -4,8 +4,6 @@
 
 Client Web App (React + TypeScript)
 For users to browse locations, book spaces, and manage their reservations.
-Admin Dashboard (React + TypeScript)
-For workspace owners to manage listings, availability, and pricing.
 
 Backend API (Node.js + Express + TypeScript)
 Handles authentication, bookings, availability, payments, and notifications.

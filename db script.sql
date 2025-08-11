@@ -1,0 +1,277 @@
+-- 1. Drop existing database if present, then create fresh one
+DROP DATABASE IF EXISTS travel_agency;
+CREATE DATABASE travel_agency CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE travel_agency;
+
+-- 2. Create tables with corrected names and spelling
+CREATE TABLE vacations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE countries (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  is_in_eu BOOLEAN NOT NULL DEFAULT FALSE
+) ENGINE=InnoDB;
+
+CREATE TABLE destinations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name varchar(255),
+  description TEXT,
+  country_id INT NOT NULL,
+  latitude DECIMAL(9,6) NOT NULL,
+  longitude DECIMAL(9,6) NOT NULL,
+  FOREIGN KEY (country_id) REFERENCES countries(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+create table Bookings (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ vacation_id INT NOT NULL,
+  first_name varchar(255),
+  last_name varchar(255),
+  email varchar(255),
+  FOREIGN KEY (vacation_id) REFERENCES vacation(id) ON DELETE cascade
+) ENGINE=InnoDB;
+
+CREATE TABLE destination_vacation (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  destination_id INT NOT NULL,
+  vacation_id INT NOT NULL,
+  description TEXT,
+  FOREIGN KEY (destination_id) REFERENCES destinations(id) ON DELETE CASCADE,
+  FOREIGN KEY (vacation_id) REFERENCES vacations(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- 3. Insert all UN-recognized countries
+-- (Below is a truncated sample; you’d need the full list of UN member states.)
+INSERT INTO countries (name, is_in_eu) VALUES
+  ('Afghanistan', FALSE),
+  ('Albania', FALSE),
+  ('Algeria', FALSE),
+  ('Andorra', FALSE),
+  ('Angola', FALSE),
+  ('Antigua and Barbuda', FALSE),
+  ('Argentina', FALSE),
+  ('Armenia', FALSE),
+  ('Australia', FALSE),
+  ('Austria', TRUE),
+  ('Azerbaijan', FALSE),
+  ('Bahamas', FALSE),
+  ('Bahrain', FALSE),
+  ('Bangladesh', FALSE),
+  ('Barbados', FALSE),
+  ('Belarus', FALSE),
+  ('Belgium', TRUE),
+  ('Belize', FALSE),
+  ('Benin', FALSE),
+  ('Bhutan', FALSE),
+  ('Bolivia', FALSE),
+  ('Bosnia and Herzegovina', FALSE),
+  ('Botswana', FALSE),
+  ('Brazil', FALSE),
+  ('Brunei', FALSE),
+  ('Bulgaria', TRUE),
+  ('Burkina Faso', FALSE),
+  ('Burundi', FALSE),
+  ('Cabo Verde', FALSE),
+  ('Cambodia', FALSE),
+  ('Cameroon', FALSE),
+  ('Canada', FALSE),
+  ('Central African Republic', FALSE),
+  ('Chad', FALSE),
+  ('Chile', FALSE),
+  ('China', FALSE),
+  ('Colombia', FALSE),
+  ('Comoros', FALSE),
+  ('Congo', FALSE),
+  ('Costa Rica', FALSE),
+  ('Croatia', TRUE),
+  ('Cuba', FALSE),
+  ('Cyprus', TRUE),
+  ('Czech Republic', TRUE),
+  ('Democratic People\'s Republic of Korea', FALSE),
+  ('Democratic Republic of the Congo', FALSE),
+  ('Denmark', TRUE),
+  ('Djibouti', FALSE),
+  ('Dominica', FALSE),
+  ('Dominican Republic', FALSE),
+  ('Ecuador', FALSE),
+  ('Egypt', FALSE),
+  ('El Salvador', FALSE),
+  ('Equatorial Guinea', FALSE),
+  ('Eritrea', FALSE),
+  ('Estonia', TRUE),
+  ('Eswatini', FALSE),
+  ('Ethiopia', FALSE),
+  ('Fiji', FALSE),
+  ('Finland', TRUE),
+  ('France', TRUE),
+  ('Gabon', FALSE),
+  ('Gambia', FALSE),
+  ('Georgia', FALSE),
+  ('Germany', TRUE),
+  ('Ghana', FALSE),
+  ('Greece', TRUE),
+  ('Grenada', FALSE),
+  ('Guatemala', FALSE),
+  ('Guinea', FALSE),
+  ('Guinea-Bissau', FALSE),
+  ('Guyana', FALSE),
+  ('Haiti', FALSE),
+  ('Honduras', FALSE),
+  ('Hungary', TRUE),
+  ('Iceland', FALSE),
+  ('India', FALSE),
+  ('Indonesia', FALSE),
+  ('Iran', FALSE),
+  ('Iraq', FALSE),
+  ('Ireland', TRUE),
+  ('Israel', FALSE),
+  ('Italy', TRUE),
+  ('Jamaica', FALSE),
+  ('Japan', FALSE),
+  ('Jordan', FALSE),
+  ('Kazakhstan', FALSE),
+  ('Kenya', FALSE),
+  ('Kiribati', FALSE),
+  ('Kuwait', FALSE),
+  ('Kyrgyzstan', FALSE),
+  ('Laos', FALSE),
+  ('Latvia', TRUE),
+  ('Lebanon', FALSE),
+  ('Lesotho', FALSE),
+  ('Liberia', FALSE),
+  ('Libya', FALSE),
+  ('Liechtenstein', FALSE),
+  ('Lithuania', TRUE),
+  ('Luxembourg', TRUE),
+  ('Madagascar', FALSE),
+  ('Malawi', FALSE),
+  ('Malaysia', FALSE),
+  ('Maldives', FALSE),
+  ('Mali', FALSE),
+  ('Malta', TRUE),
+  ('Marshall Islands', FALSE),
+  ('Mauritania', FALSE),
+  ('Mauritius', FALSE),
+  ('Mexico', FALSE),
+  ('Micronesia', FALSE),
+  ('Moldova', FALSE),
+  ('Monaco', FALSE),
+  ('Mongolia', FALSE),
+  ('Montenegro', FALSE),
+  ('Morocco', FALSE),
+  ('Mozambique', FALSE),
+  ('Myanmar', FALSE),
+  ('Namibia', FALSE),
+  ('Nauru', FALSE),
+  ('Nepal', FALSE),
+  ('Netherlands', TRUE),
+  ('New Zealand', FALSE),
+  ('Nicaragua', FALSE),
+  ('Niger', FALSE),
+  ('Nigeria', FALSE),
+  ('North Macedonia', FALSE),
+  ('Norway', FALSE),
+  ('Oman', FALSE),
+  ('Pakistan', FALSE),
+  ('Palau', FALSE),
+  ('Panama', FALSE),
+  ('Papua New Guinea', FALSE),
+  ('Paraguay', FALSE),
+  ('Peru', FALSE),
+  ('Philippines', FALSE),
+  ('Poland', TRUE),
+  ('Portugal', TRUE),
+  ('Qatar', FALSE),
+  ('Republic of Korea', FALSE),
+  ('Republic of Moldova', FALSE),
+  ('Romania', TRUE),
+  ('Russian Federation', FALSE),
+  ('Rwanda', FALSE),
+  ('Saint Kitts and Nevis', FALSE),
+  ('Saint Lucia', FALSE),
+  ('Saint Vincent and the Grenadines', FALSE),
+  ('Samoa', FALSE),
+  ('San Marino', FALSE),
+  ('Sao Tome and Principe', FALSE),
+  ('Saudi Arabia', FALSE),
+  ('Senegal', FALSE),
+  ('Serbia', FALSE),
+  ('Seychelles', FALSE),
+  ('Sierra Leone', FALSE),
+  ('Singapore', FALSE),
+  ('Slovakia', TRUE),
+  ('Slovenia', TRUE),
+  ('Solomon Islands', FALSE),
+  ('Somalia', FALSE),
+  ('South Africa', FALSE),
+  ('South Sudan', FALSE),
+  ('Spain', TRUE),
+  ('Sri Lanka', FALSE),
+  ('Sudan', FALSE),
+  ('Suriname', FALSE),
+  ('Sweden', TRUE),
+  ('Switzerland', FALSE),
+  ('Syrian Arab Republic', FALSE),
+  ('Tajikistan', FALSE),
+  ('Thailand', FALSE),
+  ('Timor-Leste', FALSE),
+  ('Togo', FALSE),
+  ('Tonga', FALSE),
+  ('Trinidad and Tobago', FALSE),
+  ('Tunisia', FALSE),
+  ('Turkey', FALSE),
+  ('Turkmenistan', FALSE),
+  ('Tuvalu', FALSE),
+  ('Uganda', FALSE),
+  ('Ukraine', FALSE),
+  ('United Arab Emirates', FALSE),
+  ('United Kingdom', FALSE),
+  ('United Republic of Tanzania', FALSE),
+  ('United States of America', FALSE),
+  ('Uruguay', FALSE),
+  ('Uzbekistan', FALSE),
+  ('Vanuatu', FALSE),
+  ('Venezuela', FALSE),
+  ('Viet Nam', FALSE),
+  ('Yemen', FALSE),
+  ('Zambia', FALSE),
+  ('Zimbabwe', FALSE);
+  
+-- … continue with all 193 UN member states …
+
+-- 4. Insert sample vacations
+INSERT INTO vacations (name, description) VALUES
+  ('European Grand Road Trip',
+   'Embark on an unforgettable European adventure that whisks you through charming cobblestone villages, majestic alpine vistas, and historic capitals—perfect for historians and romantics alike.'),
+  ('Asia Discovery Journey',
+   'Experience ancient temples, bustling markets, and serene landscapes. This journey blends cultural immersion with relaxation, spanning from neon city nights to tranquil countryside retreats.'),
+  ('Pan-American Highlights',
+   'From the snowy peaks of the Rockies to tropical Caribbean beaches and vibrant Latin culture, this multi-stop vacation offers breathtaking diversity and adventure.');
+
+-- 5. Insert sample destinations (with realistic latitudes/longitudes)
+-- Let's say: Brussels (Belgium), Paris (France), Berlin (Germany), Tokyo (Japan), Rio de Janeiro (Brazil)
+INSERT INTO destinations (country_id, latitude, longitude, description) VALUES
+  ((SELECT id FROM countries WHERE name = 'Belgium'), 50.850450, 4.348780, "Brussels (belguim\'s capital. A historical sity filled with monumen\'t and hirstorical buildings"),
+  ((SELECT id FROM countries WHERE name = 'France'), 48.856613, 2.352222, "Paris, the french capital, with the eiffel tower, champs élysées, louvre museum, and much more"),
+  ((SELECT id FROM countries WHERE name = 'Germany'), 52.520008, 13.404954, "Berlin, the German capital, filled with historical artifacts, art and ww1,ww2 and cold war history"),
+  ((SELECT id FROM countries WHERE name = 'Japan'), 35.676192, 139.650311, "Tokyo, Japan’s busy capital, mixes the ultramodern and the traditional, from neon-lit skyscrapers to historic temples. The opulent Meiji Shinto Shrine is known for its towering gate and surrounding woods. The Imperial Palace sits amid large public gardens. The city's many museums offer exhibits ranging from classical art (in the Tokyo National Museum) to a reconstructed kabuki theater (in the Edo-Tokyo Museum)") ,
+  ((SELECT id FROM countries WHERE name = 'Brazil'), -22.906847, -43.172896, "Rio de Janeiro is a huge seaside city in Brazil, famed for its Copacabana and Ipanema beaches, 38m Christ the Redeemer statue atop Mount Corcovado and for Sugarloaf Mountain, a granite peak with cable cars to its summit. The city is also known for its sprawling favelas (shanty towns). Its raucous Carnaval festival, featuring parade floats, flamboyant costumes and samba dancers, is considered the world’s largest. ");
+
+-- 6. Associate destinations to vacations
+-- European Grand Road Trip: Brussels → Paris → Berlin
+INSERT INTO destination_vacation (destination_id, vacation_id, description) VALUES
+  ((SELECT d.id FROM destinations d JOIN countries c ON d.country_id = c.id WHERE c.name = 'Belgium'), (SELECT v.id FROM vacations v WHERE v.name = 'European Grand Road Trip'), "We will start with visiting Brussels"),
+  ((SELECT d.id FROM destinations d JOIN countries c ON d.country_id = c.id WHERE c.name = 'France'), (SELECT v.id FROM vacations v WHERE v.name = 'European Grand Road Trip'), "After brussels we will hit south to Paris"),
+  ((SELECT d.id FROM destinations d JOIN countries c ON d.country_id = c.id WHERE c.name = 'Germany'), (SELECT v.id FROM vacations v WHERE v.name = 'European Grand Road Trip'), "After Paris we will go to Germany for Berlin");
+
+-- Asia Discovery Journey: Tokyo
+INSERT INTO destination_vacation (destination_id, vacation_id) VALUES
+  ((SELECT d.id FROM destinations d JOIN countries c ON d.country_id = c.id WHERE c.name = 'Japan'), (SELECT v.id FROM vacations v WHERE v.name = 'Asia Discovery Journey'));
+
+-- Pan-American Highlights: Rio de Janeiro
+INSERT INTO destination_vacation (destination_id, vacation_id) VALUES
+  ((SELECT d.id FROM destinations d JOIN countries c ON d.country_id = c.id WHERE c.name = 'Brazil'), (SELECT v.id FROM vacations v WHERE v.name = 'Pan-American Highlights'))

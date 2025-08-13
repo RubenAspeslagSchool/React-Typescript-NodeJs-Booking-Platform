@@ -1,13 +1,18 @@
 import express from 'express';
 import type { Request, Response } from 'express';
-import { vacationRepo } from './data/repos/VacationRepo.js'; // adjust path as needed
-import { countryRepo } from './data/repos/countryRepo.js'; // adjust path as needed
-import { destinationRepo } from './data/repos/DestinationRepo.js'; // adjust path as needed
-import { bookingsRepo } from './data/repos/BookingRepo.js'; // adjust path as needed
-import { destinationVacationRepo } from './data/repos/DestinationVacationRepo.js'; // adjust path as needed
+import { vacationRepo } from './data/repos/VacationRepo.js'; 
+import { countryRepo } from './data/repos/countryRepo.js'; 
+import { destinationRepo } from './data/repos/DestinationRepo.js'; 
+import { bookingsRepo } from './data/repos/BookingRepo.js';
+import { destinationVacationRepo } from './data/repos/DestinationVacationRepo.js'; 
+import cors from "cors";
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
+app.use(cors({
+  origin: "http://localhost:3001"
+}));
+
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, TypeScript Express!');
 });

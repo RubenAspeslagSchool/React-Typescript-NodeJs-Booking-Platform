@@ -22,15 +22,19 @@ Handles authentication, bookings, availability, payments, and notifications.
 2. In `server/src/data/mysqlConnectionPool.ts`, adjust the connection pool settings for your MySQL server.
 3. Open a terminal and run:
 
-> cd server
-> npm install
-> npm start
+```po
+cd server
+npm install
+npm start
+```
 
 4. Open another terminal and run:
 
-> cd clientwebapp
-> npm install
-> npm start
+```powershell
+cd clientwebapp
+npm install
+npm start
+```
 
 🧱 Architecture:
 
@@ -48,18 +52,20 @@ Optional: add email notifications (NodeMailer).
 
 📂 Folder Structure
 
-> React-Typescript-NodeJs-Booking-Platform/
-> │
-> ├── clientwebapp/         # React + TypeScript front-end
-> │   ├── src/
-> │   │   ├── components/   # UI components
-> │   │   ├── domain/       # Shared domain models
-> │   │   └── data/         # API wrappers
-> │
-> ├── server/               # Node.js + Express + TypeScript backend
-> │   ├── src/
-> │   │   ├── data/         # Repositories and DB connections
-> │   │   ├── domain/       # Shared types & interfaces
-> │   │   └── routes/       # API endpoints
-> │
-> └── README.md
+```
+React-Typescript-NodeJs-Booking-Platform/
+│
+├── clientwebapp/         # React + TypeScript front-end
+│   ├── src/
+│   │   ├── components/   # UI components
+│   │   ├── domain/       # Shared domain models
+│   │   └── data/         # API wrappers
+│
+├── server/               # Node.js + Express + TypeScript backend
+│   ├── src/
+│   │   ├── data/         # Repositories and DB connections
+│   │   ├── domain/       # Shared types & interfaces
+│   │   └── routes/       # API endpoints
+│
+└── README.md
+```

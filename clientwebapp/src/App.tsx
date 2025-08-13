@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { VacationsList } from './components/vacations';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { VacationDetail } from "./components/vacationDetail";
 
 function App() {
   
@@ -11,7 +13,12 @@ function App() {
       <h1>Vacation desteny</h1>
     </header>
     <main>
-      <VacationsList />
+    <Router>
+      <Routes>
+        <Route path="/" element={<VacationsList />} />
+        <Route path="/vacations/:id" element={<VacationDetail />} />
+      </Routes>
+    </Router>
     </main>
   </div>
   );

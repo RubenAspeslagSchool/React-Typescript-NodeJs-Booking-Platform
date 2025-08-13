@@ -21,6 +21,7 @@ export function VacationsList() {
         <div className="vacation-card" key={v.id}>
           <h2>{v.name}</h2>
           <p>{v.description}</p>
+          <a href={`/vacations/${v.id}`} className="vacation-link">View Details</a>
         </div>))}
     </div>    
   </div>

@@ -3,10 +3,10 @@
 ## 🧱 Architecture
 
 **Client Web App** (React + TypeScript)
-Allows users to browse locations, book spaces, and manage reservations.
+
 
 **Backend API** (Node.js + Express + TypeScript)
-Handles authentication, bookings, availability, payments, and notifications.
+
 
 ---
 
@@ -69,3 +69,4 @@ React-Typescript-NodeJs-Booking-Platform/
 │
 └── README.md
 ```
+

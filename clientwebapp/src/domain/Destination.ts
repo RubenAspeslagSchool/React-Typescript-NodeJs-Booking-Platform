@@ -5,4 +5,5 @@ export interface Destination {
     country_id: number;
     latitude: number;
     longitude: number;
+    img: string;
   }

@@ -51,16 +51,22 @@ export function VacationDetail() {
 
       <h2>Destinations</h2>
       {destinations.length > 0 ? (
-        <ul>
-          {destinations.map(dest => (
-            <li key={dest.id}>
-              <strong>{dest.name}</strong> - {dest.description}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No destinations linked to this vacation.</p>
-      )}
+  <div className="row">
+    {destinations.map(dest => (
+      <div className="col-md-4 mb-4" key={dest.id}>
+        <div className="card h-100 shadow-sm">
+          <img src={dest.img} className="card-img-top" alt="img" />
+          <div className="card-body">
+            <h5 className="card-title">{dest.name}</h5>
+            <p className="card-text">{dest.description}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+) : (
+  <p>No destinations linked to this vacation.</p>
+)}
     </div>
   );
 }

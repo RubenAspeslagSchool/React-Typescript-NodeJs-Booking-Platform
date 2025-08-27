@@ -7,7 +7,8 @@ USE travel_agency;
 CREATE TABLE vacations (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  description TEXT NOT NULL
+  description TEXT NOT NULL,
+  img TEXT null
 ) ENGINE=InnoDB;
 
 CREATE TABLE countries (
@@ -23,6 +24,7 @@ CREATE TABLE destinations (
   country_id INT NOT NULL,
   latitude DECIMAL(9,6) NOT NULL,
   longitude DECIMAL(9,6) NOT NULL,
+  img TEXT null,
   FOREIGN KEY (country_id) REFERENCES countries(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
@@ -32,7 +34,7 @@ create table Bookings (
   first_name varchar(255),
   last_name varchar(255),
   email varchar(255),
-  FOREIGN KEY (vacation_id) REFERENCES vacation(id) ON DELETE cascade
+  FOREIGN KEY (vacation_id) REFERENCES vacations(id) ON DELETE cascade
 ) ENGINE=InnoDB;
 
 CREATE TABLE destination_vacation (
@@ -244,22 +246,25 @@ INSERT INTO countries (name, is_in_eu) VALUES
 -- … continue with all 193 UN member states …
 
 -- 4. Insert sample vacations
-INSERT INTO vacations (name, description) VALUES
+INSERT INTO vacations (name, description,img) VALUES
   ('European Grand Road Trip',
-   'Embark on an unforgettable European adventure that whisks you through charming cobblestone villages, majestic alpine vistas, and historic capitals—perfect for historians and romantics alike.'),
+   'Embark on an unforgettable European adventure that meanders through cobblestone villages, majestic alpine vistas, and storied capitals that have shaped history. Along the way, travelers will encounter a mosaic of traditions, cuisines, and architectural wonders that reflect centuries of culture and creativity. This is a journey of contrasts—between quiet countryside landscapes and vibrant urban centers, between timeless landmarks and hidden local gems. Perfect for those who crave discovery and variety, the European Grand Road Trip offers a chance to experience the spirit of a continent in motion, leaving space for unexpected delights around every corner.',
+   '/img/Brussel.jpg'),
   ('Asia Discovery Journey',
-   'Experience ancient temples, bustling markets, and serene landscapes. This journey blends cultural immersion with relaxation, spanning from neon city nights to tranquil countryside retreats.'),
+   'Set out on a sweeping journey across Asia, where ancient temples stand in harmony with gleaming skylines, and tranquil retreats lie just beyond bustling city streets. This immersive adventure is designed to highlight both the deep-rooted traditions and the modern energy that define the region. From colorful marketplaces to serene natural sanctuaries, every stop promises a blend of reflection, wonder, and connection. Travelers can look forward to an ever-changing rhythm—moments of quiet contemplation balanced with the pulse of vibrant cultural life. It is an experience that celebrates both the diversity and unity of Asia’s many faces.',
+   'img/tokyo.jpg'),
   ('Pan-American Highlights',
-   'From the snowy peaks of the Rockies to tropical Caribbean beaches and vibrant Latin culture, this multi-stop vacation offers breathtaking diversity and adventure.');
+   'Spanning the length of two continents, this dynamic journey captures the essence of the Americas in a single sweeping itinerary. Towering mountains, lush jungles, and endless coastlines form a natural backdrop for a cultural story told in music, food, and celebration. Each region along the route offers its own flavors and traditions, from the warmth of local hospitality to the energy of thriving urban hubs. Designed for explorers who value variety and surprise, the Pan-American Highlights tour offers the chance to witness the vastness and vibrancy of the New World, leaving each traveler with a patchwork of unforgettable impressions.',
+   '/img/rio de janeiro.jpg');
 
 -- 5. Insert sample destinations (with realistic latitudes/longitudes)
 -- Let's say: Brussels (Belgium), Paris (France), Berlin (Germany), Tokyo (Japan), Rio de Janeiro (Brazil)
-INSERT INTO destinations (country_id, latitude, longitude, description) VALUES
-  ((SELECT id FROM countries WHERE name = 'Belgium'), 50.850450, 4.348780, "Brussels (belguim\'s capital. A historical sity filled with monumen\'t and hirstorical buildings"),
-  ((SELECT id FROM countries WHERE name = 'France'), 48.856613, 2.352222, "Paris, the french capital, with the eiffel tower, champs élysées, louvre museum, and much more"),
-  ((SELECT id FROM countries WHERE name = 'Germany'), 52.520008, 13.404954, "Berlin, the German capital, filled with historical artifacts, art and ww1,ww2 and cold war history"),
-  ((SELECT id FROM countries WHERE name = 'Japan'), 35.676192, 139.650311, "Tokyo, Japan’s busy capital, mixes the ultramodern and the traditional, from neon-lit skyscrapers to historic temples. The opulent Meiji Shinto Shrine is known for its towering gate and surrounding woods. The Imperial Palace sits amid large public gardens. The city's many museums offer exhibits ranging from classical art (in the Tokyo National Museum) to a reconstructed kabuki theater (in the Edo-Tokyo Museum)") ,
-  ((SELECT id FROM countries WHERE name = 'Brazil'), -22.906847, -43.172896, "Rio de Janeiro is a huge seaside city in Brazil, famed for its Copacabana and Ipanema beaches, 38m Christ the Redeemer statue atop Mount Corcovado and for Sugarloaf Mountain, a granite peak with cable cars to its summit. The city is also known for its sprawling favelas (shanty towns). Its raucous Carnaval festival, featuring parade floats, flamboyant costumes and samba dancers, is considered the world’s largest. ");
+INSERT INTO destinations (country_id, latitude, longitude, description, img) VALUES
+  ((SELECT id FROM countries WHERE name = 'Belgium'), 50.850450, 4.348780, "Brussels (belguim\'s capital. A historical sity filled with monumen\'t and hirstorical buildings", "/img/Brussel.jpg"),
+  ((SELECT id FROM countries WHERE name = 'France'), 48.856613, 2.352222, "Paris, the french capital, with the eiffel tower, champs élysées, louvre museum, and much more", "https://res.cloudinary.com/dtljonz0f/image/upload/c_auto,ar_1:1,w_3840,g_auto/f_auto/q_auto/v1/gc-v1/paris/3%20giorni%20a%20Parigi%20Tour%20Eiffel?_a=BAVAZGE70"),
+  ((SELECT id FROM countries WHERE name = 'Germany'), 52.520008, 13.404954, "Berlin, the German capital, filled with historical artifacts, art and ww1,ww2 and cold war history" , "/img/Berlin.jpg"),
+  ((SELECT id FROM countries WHERE name = 'Japan'), 35.676192, 139.650311, "Tokyo, Japan’s busy capital, mixes the ultramodern and the traditional, from neon-lit skyscrapers to historic temples. The opulent Meiji Shinto Shrine is known for its towering gate and surrounding woods. The Imperial Palace sits amid large public gardens. The city's many museums offer exhibits ranging from classical art (in the Tokyo National Museum) to a reconstructed kabuki theater (in the Edo-Tokyo Museum)", "/img/tokyo.jpg") ,
+  ((SELECT id FROM countries WHERE name = 'Brazil'), -22.906847, -43.172896, "Rio de Janeiro is a huge seaside city in Brazil, famed for its Copacabana and Ipanema beaches, 38m Christ the Redeemer statue atop Mount Corcovado and for Sugarloaf Mountain, a granite peak with cable cars to its summit. The city is also known for its sprawling favelas (shanty towns). Its raucous Carnaval festival, featuring parade floats, flamboyant costumes and samba dancers, is considered the world’s largest. " , "/img/rio de janeiro.jpg");
 
 -- 6. Associate destinations to vacations
 -- European Grand Road Trip: Brussels → Paris → Berlin

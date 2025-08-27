@@ -14,14 +14,31 @@
 }
 
 .App-header {
+  position: relative;         /* needed so absolute children are placed inside */
   background-color: #282c34;
-  
   display: flex;
-  flex-direction: column;
+  justify-content: center;    /* keep h1 centered */
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  height: 80px;               /* fixed height makes positioning cleaner */
+}
+
+.home-button {
+  position: absolute;   /* place it relative to header */
+  left: 20px;           /* push it to the left */
+  top: 50%;             /* vertically center */
+  transform: translateY(-50%);  /* correct for top alignment */
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.home-button:hover {
+  background: rgba(255,255,255,0.1);
 }
 
 .App-link {

@@ -7,6 +7,10 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "types": [
+        "node",
+        "vue"
       ]
     },
     "lib": [
@@ -15,5 +19,9 @@
       "dom.iterable",
       "scripthost"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "path/to/any/other/files/you/need/to/exclude"
+  ]
 }
